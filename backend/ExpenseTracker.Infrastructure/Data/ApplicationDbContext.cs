@@ -50,14 +50,15 @@ namespace ExpenseTracker.Infrastructure.Data
 
         private static void SeedCategories(ModelBuilder modelBuilder)
         {
+            var seedDate = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             var categories = new[]
             {
-                new Category { Id = 1, Name = "Food & Dining", Description = "Restaurants, groceries, food delivery", CategoryType = ExpenseCategory.Food, CreatedAt = DateTime.UtcNow },
-                new Category { Id = 2, Name = "Transportation", Description = "Gas, public transport, parking", CategoryType = ExpenseCategory.Transportation, CreatedAt = DateTime.UtcNow },
-                new Category { Id = 3, Name = "Entertainment", Description = "Movies, games, subscriptions", CategoryType = ExpenseCategory.Entertainment, CreatedAt = DateTime.UtcNow },
-                new Category { Id = 4, Name = "Healthcare", Description = "Medical bills, pharmacy", CategoryType = ExpenseCategory.Healthcare, CreatedAt = DateTime.UtcNow },
-                new Category { Id = 5, Name = "Shopping", Description = "Clothing, electronics", CategoryType = ExpenseCategory.Shopping, CreatedAt = DateTime.UtcNow },
-                new Category { Id = 6, Name = "Utilities", Description = "Electricity, water, internet", CategoryType = ExpenseCategory.Utilities, CreatedAt = DateTime.UtcNow }
+                new Category { Id = 1, Name = "Food & Dining", Description = "Restaurants, groceries, food delivery", CategoryType = ExpenseCategory.Food, CreatedAt = seedDate },
+                new Category { Id = 2, Name = "Transportation", Description = "Gas, public transport, parking", CategoryType = ExpenseCategory.Transportation, CreatedAt = seedDate },
+                new Category { Id = 3, Name = "Entertainment", Description = "Movies, games, subscriptions", CategoryType = ExpenseCategory.Entertainment, CreatedAt = seedDate },
+                new Category { Id = 4, Name = "Healthcare", Description = "Medical bills, pharmacy", CategoryType = ExpenseCategory.Healthcare, CreatedAt = seedDate },
+                new Category { Id = 5, Name = "Shopping", Description = "Clothing, electronics", CategoryType = ExpenseCategory.Shopping, CreatedAt = seedDate },
+                new Category { Id = 6, Name = "Utilities", Description = "Electricity, water, internet", CategoryType = ExpenseCategory.Utilities, CreatedAt = seedDate }
             };
 
             modelBuilder.Entity<Category>().HasData(categories);

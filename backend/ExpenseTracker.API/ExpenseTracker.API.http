@@ -1,6 +1,32 @@
-@ExpenseTracker.API_HostAddress = http://localhost:5274
+@ExpenseTracker.API_HostAddress = http://localhost:5275
 
-GET {{ExpenseTracker.API_HostAddress}}/weatherforecast/
+# Register a new user
+POST {{ExpenseTracker.API_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "password": "Password123!",
+  "confirmPassword": "Password123!"
+}
+
+###
+
+# Login with the user
+POST {{ExpenseTracker.API_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "Password123!"
+}
+
+###
+
+# Check if email exists
+GET {{ExpenseTracker.API_HostAddress}}/api/auth/check-email/john.doe@example.com
 Accept: application/json
 
 ###
