@@ -9,18 +9,15 @@ namespace ExpenseTracker.Application.Services
     public class AuthService : IAuthService
     {
         private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
         public AuthService(
             UserManager<User> userManager,
-            SignInManager<User> signInManager,
             ITokenService tokenService,
             IMapper mapper)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _tokenService = tokenService;
             _mapper = mapper;
         }
@@ -93,9 +90,9 @@ namespace ExpenseTracker.Application.Services
                     };
                 }
 
-                // Check password
-                var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
-                if (!result.Succeeded)
+                // Check password using UserManager instead of SignInManager
+                var isPasswordValid = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+                if (!isPasswordValid)
                 {
                     return new AuthResponseDto
                     {

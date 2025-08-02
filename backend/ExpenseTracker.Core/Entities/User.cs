@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ExpenseTracker.Core.Entities
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser<Guid>
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;

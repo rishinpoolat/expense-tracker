@@ -10,7 +10,7 @@ namespace ExpenseTracker.Core.Entities
 
         // Foreign keys
         public int CategoryId { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         // Navigation properties
         public virtual Category Category { get; set; } = null!;

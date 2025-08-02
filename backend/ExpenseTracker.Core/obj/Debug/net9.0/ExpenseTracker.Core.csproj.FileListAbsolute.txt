@@ -1,0 +1,12 @@
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/Debug/net9.0/ExpenseTracker.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/Debug/net9.0/ExpenseTracker.Core.AssemblyInfoInputs.cache
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/Debug/net9.0/ExpenseTracker.Core.AssemblyInfo.cs
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/Debug/net9.0/ExpenseTracker.Core.csproj.CoreCompileInputs.cache
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/bin/Debug/net9.0/ExpenseTracker.Core.deps.json
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/bin/Debug/net9.0/ExpenseTracker.Core.dll
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/bin/Debug/net9.0/ExpenseTracker.Core.pdb
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/Debug/net9.0/ExpenseTracker.Core.csproj.AssemblyReference.cache
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/Debug/net9.0/ExpenseTracker.Core.dll
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/Debug/net9.0/refint/ExpenseTracker.Core.dll
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/Debug/net9.0/ExpenseTracker.Core.pdb
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/Debug/net9.0/ref/ExpenseTracker.Core.dll
