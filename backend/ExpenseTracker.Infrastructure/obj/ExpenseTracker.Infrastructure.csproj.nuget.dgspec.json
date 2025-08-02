@@ -1,0 +1,222 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Infrastructure/ExpenseTracker.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Application/ExpenseTracker.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Application/ExpenseTracker.Application.csproj",
+        "projectName": "ExpenseTracker.Application",
+        "projectPath": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Application/ExpenseTracker.Application.csproj",
+        "packagesPath": "/Users/mohammedrishinpoolat/.nuget/packages/",
+        "outputPath": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mohammedrishinpoolat/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/ExpenseTracker.Core.csproj": {
+                "projectPath": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/ExpenseTracker.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[15.0.1, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/ExpenseTracker.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/ExpenseTracker.Core.csproj",
+        "projectName": "ExpenseTracker.Core",
+        "projectPath": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/ExpenseTracker.Core.csproj",
+        "packagesPath": "/Users/mohammedrishinpoolat/.nuget/packages/",
+        "outputPath": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mohammedrishinpoolat/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Infrastructure/ExpenseTracker.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Infrastructure/ExpenseTracker.Infrastructure.csproj",
+        "projectName": "ExpenseTracker.Infrastructure",
+        "projectPath": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Infrastructure/ExpenseTracker.Infrastructure.csproj",
+        "packagesPath": "/Users/mohammedrishinpoolat/.nuget/packages/",
+        "outputPath": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mohammedrishinpoolat/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Application/ExpenseTracker.Application.csproj": {
+                "projectPath": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Application/ExpenseTracker.Application.csproj"
+              },
+              "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/ExpenseTracker.Core.csproj": {
+                "projectPath": "/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.Core/ExpenseTracker.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
