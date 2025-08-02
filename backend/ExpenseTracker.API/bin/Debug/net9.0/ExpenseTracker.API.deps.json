@@ -15,6 +15,7 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.7",
           "Microsoft.AspNetCore.OpenApi": "9.0.7",
           "Microsoft.EntityFrameworkCore.Design": "9.0.7",
+          "Scalar.AspNetCore": "2.6.7",
           "Swashbuckle.AspNetCore": "9.0.3"
         },
         "runtime": {
@@ -861,6 +862,14 @@
           }
         }
       },
+      "Scalar.AspNetCore/2.6.7": {
+        "runtime": {
+          "lib/net9.0/Scalar.AspNetCore.dll": {
+            "assemblyVersion": "2.6.7.0",
+            "fileVersion": "2.6.7.0"
+          }
+        }
+      },
       "Swashbuckle.AspNetCore/9.0.3": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "9.0.0",
@@ -1575,6 +1584,13 @@
       "sha512": "sha512-YqueG52R/Xej4VVbKuRIodjiAhV0HR/XVbLbNrJhCZnzjnSjgMJ/dCdV0akQQxavX6hp/LC6rqLGLcXeQYU7XA==",
       "path": "mono.texttemplating/3.0.0",
       "hashPath": "mono.texttemplating.3.0.0.nupkg.sha512"
+    },
+    "Scalar.AspNetCore/2.6.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Fi9zutnUQQVDui4+VmwLiJMlaXCmq/4wlnoOFG87XwBAvO7D+KIrajKaMeAzpA1eaR9ablZmulnyFzDSBz7M6A==",
+      "path": "scalar.aspnetcore/2.6.7",
+      "hashPath": "scalar.aspnetcore.2.6.7.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/9.0.3": {
       "type": "package",

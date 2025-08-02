@@ -179,3 +179,4 @@
 /Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.API/obj/Debug/net9.0/ExpenseTracker.API.pdb
 /Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.API/obj/Debug/net9.0/ExpenseTracker.API.genruntimeconfig.cache
 /Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.API/obj/Debug/net9.0/ref/ExpenseTracker.API.dll
+/Users/mohammedrishinpoolat/Projects/personal-projects/dotnet/expense-tracker/backend/ExpenseTracker.API/bin/Debug/net9.0/Scalar.AspNetCore.dll
