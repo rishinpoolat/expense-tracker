@@ -18,8 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
-        b => b.MigrationsAssembly("ExpenseTracker.API")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Identity
 builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
@@ -70,11 +69,13 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 // Controllers
 builder.Services.AddControllers();
 
-// Swagger
+// OpenAPI/Scalar Documentation
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+// Configure pipeline
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
