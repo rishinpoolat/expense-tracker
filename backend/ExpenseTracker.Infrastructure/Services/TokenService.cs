@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using ExpenseTracker.Application.Interfaces;
+using ExpenseTracker.Core.Interfaces;
 using ExpenseTracker.Core.Entities;
 
 namespace ExpenseTracker.Infrastructure.Services

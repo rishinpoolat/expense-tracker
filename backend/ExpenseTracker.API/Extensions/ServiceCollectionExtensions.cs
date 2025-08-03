@@ -5,12 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using FluentValidation;
 using ExpenseTracker.Core.Entities;
+using ExpenseTracker.Core.Interfaces;
 using ExpenseTracker.Infrastructure.Data;
 using ExpenseTracker.Infrastructure.Services;
 using ExpenseTracker.Application.Interfaces;
 using ExpenseTracker.Application.Services;
 using ExpenseTracker.Application.Mappings;
 using ExpenseTracker.Application.Validators;
+
+
 
 namespace ExpenseTracker.API.Extensions;
 
@@ -20,7 +23,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
-        
+
         return services;
     }
 
@@ -60,7 +63,7 @@ public static class ServiceCollectionExtensions
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = configuration["JwtSettings:Issuer"],
-                ValidAudience = configuration["JwtSettings:Audience"],  
+                ValidAudience = configuration["JwtSettings:Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
             };
         });
@@ -79,6 +82,8 @@ public static class ServiceCollectionExtensions
         // Application Services
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ITokenService, TokenService>();
+        // Add this line to register the expense service
+        services.AddScoped<IExpenseService, ExpenseService>();
 
         return services;
     }

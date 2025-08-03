@@ -3,6 +3,7 @@ using AutoMapper;
 using ExpenseTracker.Application.DTOs.Auth;
 using ExpenseTracker.Application.Interfaces;
 using ExpenseTracker.Core.Entities;
+using ExpenseTracker.Core.Interfaces;
 
 namespace ExpenseTracker.Application.Services
 {
