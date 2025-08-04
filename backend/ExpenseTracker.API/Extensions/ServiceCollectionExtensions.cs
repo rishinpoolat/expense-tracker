@@ -85,6 +85,18 @@ public static class ServiceCollectionExtensions
         // Add this line to register the expense service
         services.AddScoped<IExpenseService, ExpenseService>();
 
+        // Add CORS
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowFrontend", policy =>
+            {
+                policy.WithOrigins("http://localhost:5173", "http://localhost:5174")
+                      .AllowAnyHeader()
+                      .AllowAnyMethod()
+                      .AllowCredentials();
+            });
+        });
+
         return services;
     }
 

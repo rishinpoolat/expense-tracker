@@ -14,6 +14,7 @@ public static class WebApplicationExtensions
         }
 
         app.UseHttpsRedirection();
+        app.UseCors("AllowFrontend");
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
