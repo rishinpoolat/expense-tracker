@@ -1,6 +1,15 @@
 .expense-form {
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+
+.form-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
@@ -66,7 +75,11 @@
   display: flex;
   gap: 12px;
   justify-content: flex-end;
-  margin-top: 8px;
+  margin-top: 20px;
+  padding: 20px 0 0 0;
+  border-top: 1px solid #dee2e6;
+  background: white;
+  flex-shrink: 0;
 }
 
 .btn-primary,
@@ -117,6 +130,88 @@
   margin-bottom: 8px;
 }
 
+/* Receipt Upload Styles */
+.receipt-upload {
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  background: #f8f9fa;
+  transition: all 0.2s ease;
+}
+
+.receipt-upload:hover {
+  border-color: #6c757d;
+  background: #e9ecef;
+}
+
+.receipt-upload-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.file-input {
+  padding: 12px !important;
+  border: 1px solid #ced4da !important;
+  background: white !important;
+  cursor: pointer;
+}
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+}
+
+.selected-file span {
+  font-size: 14px;
+  color: #495057;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-process-receipt {
+  padding: 8px 16px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-process-receipt:hover:not(:disabled) {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+.btn-process-receipt:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ocr-progress {
+  text-align: center;
+  font-size: 14px;
+  color: #6c757d;
+  font-style: italic;
+  padding: 8px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+}
+
 @media (max-width: 768px) {
   .form-row {
     grid-template-columns: 1fr;
@@ -130,5 +225,16 @@
   .btn-primary,
   .btn-secondary {
     width: 100%;
+  }
+
+  .selected-file {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .selected-file span {
+    text-align: center;
+    white-space: normal;
   }
 }

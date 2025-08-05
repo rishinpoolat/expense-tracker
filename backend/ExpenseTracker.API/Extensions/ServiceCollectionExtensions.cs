@@ -13,8 +13,6 @@ using ExpenseTracker.Application.Services;
 using ExpenseTracker.Application.Mappings;
 using ExpenseTracker.Application.Validators;
 
-
-
 namespace ExpenseTracker.API.Extensions;
 
 public static class ServiceCollectionExtensions
@@ -84,6 +82,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITokenService, TokenService>();
         // Add this line to register the expense service
         services.AddScoped<IExpenseService, ExpenseService>();
+        
+        // Register OCR Service with HttpClient
+        services.AddHttpClient<OcrService>();
+        services.AddScoped<OcrService>();
 
         // Add CORS
         services.AddCors(options =>

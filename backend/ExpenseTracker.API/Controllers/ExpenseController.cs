@@ -4,6 +4,7 @@ using System.Security.Claims;
 using FluentValidation;
 using ExpenseTracker.Application.DTOs.Expenses;
 using ExpenseTracker.Application.Interfaces;
+using ExpenseTracker.Application.Services;
 
 namespace ExpenseTracker.API.Controllers
 {
@@ -15,15 +16,18 @@ namespace ExpenseTracker.API.Controllers
         private readonly IExpenseService _expenseService;
         private readonly IValidator<CreateExpenseDto> _createValidator;
         private readonly IValidator<UpdateExpenseDto> _updateValidator;
+        private readonly OcrService _ocrService;
 
         public ExpensesController(
             IExpenseService expenseService,
             IValidator<CreateExpenseDto> createValidator,
-            IValidator<UpdateExpenseDto> updateValidator)
+            IValidator<UpdateExpenseDto> updateValidator,
+            OcrService ocrService)
         {
             _expenseService = expenseService;
             _createValidator = createValidator;
             _updateValidator = updateValidator;
+            _ocrService = ocrService;
         }
 
         private Guid GetUserId()
@@ -225,6 +229,45 @@ namespace ExpenseTracker.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("process-receipt")]
+        public async Task<ActionResult<ReceiptData>> ProcessReceipt(IFormFile file)
+        {
+            try
+            {
+                if (file == null || file.Length == 0)
+                {
+                    return BadRequest(new { message = "No file uploaded" });
+                }
+
+                // Check if file is an image
+                var allowedTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif", "image/bmp" };
+                if (!allowedTypes.Contains(file.ContentType.ToLower()))
+                {
+                    return BadRequest(new { message = "Only image files are allowed" });
+                }
+
+                // Check file size (limit to 10MB)
+                if (file.Length > 10 * 1024 * 1024)
+                {
+                    return BadRequest(new { message = "File size cannot exceed 10MB" });
+                }
+
+                // Convert file to byte array
+                using var memoryStream = new MemoryStream();
+                await file.CopyToAsync(memoryStream);
+                var imageBytes = memoryStream.ToArray();
+
+                // Process receipt with OCR
+                var receiptData = await _ocrService.ProcessReceiptAsync(imageBytes, file.FileName);
+
+                return Ok(receiptData);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing the receipt", error = ex.Message });
             }
         }
     }

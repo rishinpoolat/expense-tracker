@@ -135,7 +135,7 @@ const ExpenseCharts: React.FC<ExpenseChartsProps> = ({ expenses, period }) => {
                   fill="#8884d8"
                   dataKey="value"
                 >
-                  {pieData.map((entry, index) => (
+                  {pieData.map((_, index) => (
                     <Cell 
                       key={`cell-${index}`} 
                       fill={categoryColors[index % categoryColors.length]} 

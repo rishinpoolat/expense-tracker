@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, TrendingUp } from 'lucide-react';
+import { Plus, TrendingUp, Calendar, BarChart3 } from 'lucide-react';
+import { startOfWeek, startOfMonth, startOfYear, endOfWeek, endOfMonth, endOfYear } from 'date-fns';
 import Navbar from './dashboard/Navbar';
 import ExpenseList from './dashboard/ExpenseList';
 import ExpenseCharts from './dashboard/ExpenseCharts';
 import ExpenseForm from './dashboard/ExpenseForm';
 import PeriodFilter from './dashboard/PeriodFilter';
+import DateRangeTracker from './dashboard/DateRangeTracker';
 import Modal from './ui/Modal';
 import ConfirmDialog from './ui/ConfirmDialog';
 import { expenseService } from '../services/expenseService';
@@ -16,6 +18,7 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'year'>('month');
+  const [activeTab, setActiveTab] = useState<'overview' | 'date-range'>('overview');
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
@@ -113,7 +116,35 @@ const Dashboard: React.FC = () => {
     setEditingExpense(null);
   };
 
-  const totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+  // Filter expenses by selected period
+  const getFilteredExpenses = () => {
+    const now = new Date();
+    let startDate: Date;
+    let endDate: Date;
+
+    switch (selectedPeriod) {
+      case 'week':
+        startDate = startOfWeek(now);
+        endDate = endOfWeek(now);
+        break;
+      case 'month':
+        startDate = startOfMonth(now);
+        endDate = endOfMonth(now);
+        break;
+      case 'year':
+        startDate = startOfYear(now);
+        endDate = endOfYear(now);
+        break;
+    }
+
+    return expenses.filter(expense => {
+      const expenseDate = new Date(expense.expenseDate);
+      return expenseDate >= startDate && expenseDate <= endDate;
+    });
+  };
+
+  const filteredExpenses = getFilteredExpenses();
+  const filteredTotal = filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0);
 
   return (
     <div className="dashboard">
@@ -135,14 +166,32 @@ const Dashboard: React.FC = () => {
                 <p>Track and manage your expenses</p>
               </div>
               
+              {/* Tab Navigation */}
+              <div className="tab-navigation">
+                <button 
+                  onClick={() => setActiveTab('overview')}
+                  className={`tab-btn ${activeTab === 'overview' ? 'active' : ''}`}
+                >
+                  <BarChart3 size={18} />
+                  Overview
+                </button>
+                <button 
+                  onClick={() => setActiveTab('date-range')}
+                  className={`tab-btn ${activeTab === 'date-range' ? 'active' : ''}`}
+                >
+                  <Calendar size={18} />
+                  Date Range
+                </button>
+              </div>
+              
               <div className="stats-card">
                 <div className="stats-content">
                   <div className="stats-icon">
                     <TrendingUp size={24} />
                   </div>
                   <div className="stats-text">
-                    <span className="stats-label">Total Expenses</span>
-                    <span className="stats-value">${totalExpenses.toFixed(2)}</span>
+                    <span className="stats-label">Total Expenses ({selectedPeriod})</span>
+                    <span className="stats-value">${filteredTotal.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
@@ -158,34 +207,46 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="period-filter-container">
-          <PeriodFilter 
-            selectedPeriod={selectedPeriod} 
-            onPeriodChange={setSelectedPeriod} 
-          />
-        </div>
+        {/* Tab Content */}
+        {activeTab === 'overview' ? (
+          <>
+            <div className="period-filter-container">
+              <PeriodFilter 
+                selectedPeriod={selectedPeriod} 
+                onPeriodChange={setSelectedPeriod} 
+              />
+            </div>
 
-        <div className="dashboard-content">
-          <div className="charts-section">
-            <ExpenseCharts expenses={expenses} period={selectedPeriod} />
-          </div>
+            <div className="dashboard-content">
+              <div className="charts-section">
+                <ExpenseCharts expenses={expenses} period={selectedPeriod} />
+              </div>
 
-          <div className="expenses-section">
-            <div className="section-header">
-              <h2>Recent Expenses</h2>
-              <div className="expense-count">
-                {expenses.length} {expenses.length === 1 ? 'expense' : 'expenses'}
+              <div className="expenses-section">
+                <div className="section-header">
+                  <h2>Expenses ({selectedPeriod})</h2>
+                  <div className="expense-count">
+                    {filteredExpenses.length} {filteredExpenses.length === 1 ? 'expense' : 'expenses'}
+                  </div>
+                </div>
+                
+                <ExpenseList
+                  expenses={filteredExpenses}
+                  onEdit={handleEditClick}
+                  onDelete={handleDeleteClick}
+                  loading={loading}
+                />
               </div>
             </div>
-            
-            <ExpenseList
-              expenses={expenses}
-              onEdit={handleEditClick}
-              onDelete={handleDeleteClick}
-              loading={loading}
-            />
-          </div>
-        </div>
+          </>
+        ) : (
+          <DateRangeTracker
+            expenses={expenses}
+            onEdit={handleEditClick}
+            onDelete={handleDeleteClick}
+            loading={loading}
+          />
+        )}
 
         <div className="bottom-spacing"></div>
       </div>

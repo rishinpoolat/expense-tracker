@@ -75,6 +75,43 @@
   margin: 0;
 }
 
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+  margin: 16px 0;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.tab-btn.active {
+  background: white;
+  color: #212529;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .stats-card {
   background: white;
   border-radius: 16px;
@@ -245,5 +282,16 @@
   .stats-card {
     min-width: auto;
     width: 100%;
+  }
+
+  /* Mobile tab navigation */
+  .tab-navigation {
+    margin: 12px 0;
+  }
+
+  .tab-btn {
+    padding: 10px 16px;
+    font-size: 12px;
+    gap: 6px;
   }
 }
