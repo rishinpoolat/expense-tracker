@@ -3,8 +3,9 @@ using AutoMapper;
 using ExpenseTracker.Application.DTOs.Auth;
 using ExpenseTracker.Application.Interfaces;
 using ExpenseTracker.Core.Entities;
+using ExpenseTracker.Core.Interfaces;
 
-namespace ExpenseTracker.Infrastructure.Services
+namespace ExpenseTracker.Application.Services
 {
     public class AuthService : IAuthService
     {

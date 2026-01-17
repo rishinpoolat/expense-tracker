@@ -5,9 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using FluentValidation;
 using ExpenseTracker.Core.Entities;
+using ExpenseTracker.Core.Interfaces;
 using ExpenseTracker.Infrastructure.Data;
 using ExpenseTracker.Infrastructure.Services;
+using ExpenseTracker.Infrastructure.Repositories;
 using ExpenseTracker.Application.Interfaces;
+using ExpenseTracker.Application.Services;
 using ExpenseTracker.Application.Mappings;
 using ExpenseTracker.Application.Validators;
 
@@ -75,12 +78,17 @@ public static class ServiceCollectionExtensions
         // FluentValidation
         services.AddValidatorsFromAssemblyContaining<RegisterDtoValidator>();
 
+        // Repositories (Infrastructure layer)
+        services.AddScoped<IExpenseRepository, ExpenseRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+        // Infrastructure Services
+        services.AddScoped<ITokenService, TokenService>();
+
         // Application Services
         services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<ITokenService, TokenService>();
-        // Add this line to register the expense service
         services.AddScoped<IExpenseService, ExpenseService>();
-        
+
         // Register OCR Service with HttpClient
         services.AddHttpClient<OcrService>();
         services.AddScoped<OcrService>();

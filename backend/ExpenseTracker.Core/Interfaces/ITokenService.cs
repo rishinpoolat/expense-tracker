@@ -1,6 +1,6 @@
 using ExpenseTracker.Core.Entities;
 
-namespace ExpenseTracker.Application.Interfaces
+namespace ExpenseTracker.Core.Interfaces
 {
     public interface ITokenService
     {
