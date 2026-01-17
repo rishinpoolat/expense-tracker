@@ -4,7 +4,7 @@ using System.Security.Claims;
 using FluentValidation;
 using ExpenseTracker.Application.DTOs.Expenses;
 using ExpenseTracker.Application.Interfaces;
-using ExpenseTracker.Application.Services;
+using ExpenseTracker.Infrastructure.Services;
 
 namespace ExpenseTracker.API.Controllers
 {

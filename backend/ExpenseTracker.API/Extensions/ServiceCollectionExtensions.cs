@@ -5,11 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using FluentValidation;
 using ExpenseTracker.Core.Entities;
-using ExpenseTracker.Core.Interfaces;
 using ExpenseTracker.Infrastructure.Data;
 using ExpenseTracker.Infrastructure.Services;
 using ExpenseTracker.Application.Interfaces;
-using ExpenseTracker.Application.Services;
 using ExpenseTracker.Application.Mappings;
 using ExpenseTracker.Application.Validators;
 
