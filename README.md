@@ -93,7 +93,7 @@ API starts at **http://localhost:5274**. The SQLite database (`ExpenseTracker.db
 
 ```bash
 cd frontend
-npm install   # first time only
+npm install   # first time only.  
 npm run dev
 ```
 
