@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, User, DollarSign } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import { authService } from '../../services/authService';
 import './Navbar.css';
 
@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
       <div className="navbar-container">
         <div className="navbar-content">
           <div className="navbar-brand">
-            <DollarSign className="brand-icon" />
+            <div className="brand-logo">ET</div>
             <span className="brand-text">ExpenseTracker</span>
           </div>
 
