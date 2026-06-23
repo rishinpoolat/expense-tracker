@@ -361,10 +361,9 @@ FodyWeavers.xsd
 *.userosscache
 *.sln.docstates
 
-# Claude Code
+# Claude Code (personal/local workflow files — not shared via git in this solo repo)
 .claude/
 CLAUDE.md
 CODEBASE_MAP.md
-PLAN.md
-PLAN_ARCHIVE.md
 specs/
+.trash/
