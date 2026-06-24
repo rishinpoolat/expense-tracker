@@ -42,6 +42,40 @@
   font-size: 14px;
 }
 
+.expense-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.expense-count {
+  font-size: 14px;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.export-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2e7d32;
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.export-btn:hover {
+  background: #2e7d32;
+  color: white;
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+}
+
 .expense-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
