@@ -1,7 +1,8 @@
 import React from 'react';
-import { Edit2, Trash2, Calendar, DollarSign } from 'lucide-react';
+import { Edit2, Trash2, Calendar, DollarSign, Download } from 'lucide-react';
 import type { Expense } from '../../types/expense';
 import { format } from 'date-fns';
+import { exportExpensesToCsv } from '../../utils/exportCsv';
 import './ExpenseList.css';
 
 interface ExpenseListProps {
@@ -46,6 +47,21 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, onEdit, onDelete, l
 
   return (
     <div className="expense-list">
+      <div className="expense-list-header">
+        <span className="expense-count">
+          {expenses.length} expense{expenses.length !== 1 ? 's' : ''}
+        </span>
+        <button
+          type="button"
+          className="export-btn"
+          onClick={() => exportExpensesToCsv(expenses)}
+          title="Download as CSV"
+          aria-label="Export expenses as CSV"
+        >
+          <Download size={15} />
+          Export CSV
+        </button>
+      </div>
       <div className="expense-grid">
         {expenses.map((expense) => (
           <div key={expense.id} className="expense-card">
