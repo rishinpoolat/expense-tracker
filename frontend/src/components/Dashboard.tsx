@@ -7,10 +7,15 @@ import ExpenseCharts from './dashboard/ExpenseCharts';
 import ExpenseForm from './dashboard/ExpenseForm';
 import PeriodFilter from './dashboard/PeriodFilter';
 import DateRangeTracker from './dashboard/DateRangeTracker';
+import BudgetAlert from './dashboard/BudgetAlert';
+import BudgetCard from './dashboard/BudgetCard';
+import SetBudgetModal from './dashboard/SetBudgetModal';
 import Modal from './ui/Modal';
 import ConfirmDialog from './ui/ConfirmDialog';
 import { expenseService } from '../services/expenseService';
+import { budgetService } from '../services/budgetService';
 import type { Expense, CreateExpenseDto, UpdateExpenseDto } from '../types/expense';
+import type { BudgetStatus } from '../types/budget';
 import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
@@ -25,9 +30,12 @@ const Dashboard: React.FC = () => {
   const [formLoading, setFormLoading] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deletingExpenseId, setDeletingExpenseId] = useState<number | null>(null);
+  const [budgetStatus, setBudgetStatus] = useState<BudgetStatus | null>(null);
+  const [showSetBudgetModal, setShowSetBudgetModal] = useState(false);
 
   useEffect(() => {
     fetchExpenses();
+    fetchBudgetStatus();
   }, []);
 
   const fetchExpenses = async () => {
@@ -44,6 +52,15 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const fetchBudgetStatus = async () => {
+    try {
+      const status = await budgetService.getBudgetStatus();
+      setBudgetStatus(status);
+    } catch (err) {
+      console.error('Error fetching budget status:', err);
+    }
+  };
+
   const handleAddExpense = async (expenseData: CreateExpenseDto) => {
     try {
       setFormLoading(true);
@@ -51,6 +68,7 @@ const Dashboard: React.FC = () => {
       setExpenses(prev => [newExpense, ...prev]);
       setShowAddModal(false);
       setError('');
+      fetchBudgetStatus();
     } catch (err: any) {
       setError('Failed to create expense. Please try again.');
       console.error('Error creating expense:', err);
@@ -71,6 +89,7 @@ const Dashboard: React.FC = () => {
       setShowEditModal(false);
       setEditingExpense(null);
       setError('');
+      fetchBudgetStatus();
     } catch (err: any) {
       setError('Failed to update expense. Please try again.');
       console.error('Error updating expense:', err);
@@ -91,6 +110,7 @@ const Dashboard: React.FC = () => {
       await expenseService.deleteExpense(deletingExpenseId);
       setExpenses(prev => prev.filter(expense => expense.id !== deletingExpenseId));
       setError('');
+      fetchBudgetStatus();
     } catch (err: any) {
       setError('Failed to delete expense. Please try again.');
       console.error('Error deleting expense:', err);
@@ -151,6 +171,10 @@ const Dashboard: React.FC = () => {
       <Navbar />
       
       <div className="dashboard-container">
+        {budgetStatus?.isNearLimit && (
+          <BudgetAlert budgetStatus={budgetStatus} />
+        )}
+
         {error && (
           <div className="error-banner">
             <p>{error}</p>
@@ -184,16 +208,23 @@ const Dashboard: React.FC = () => {
                 </button>
               </div>
               
-              <div className="stats-card">
-                <div className="stats-content">
-                  <div className="stats-icon">
-                    <TrendingUp size={24} />
-                  </div>
-                  <div className="stats-text">
-                    <span className="stats-label">Total Expenses ({selectedPeriod})</span>
-                    <span className="stats-value">${filteredTotal.toFixed(2)}</span>
+              <div className="stats-cards">
+                <div className="stats-card">
+                  <div className="stats-content">
+                    <div className="stats-icon">
+                      <TrendingUp size={24} />
+                    </div>
+                    <div className="stats-text">
+                      <span className="stats-label">Total Expenses ({selectedPeriod})</span>
+                      <span className="stats-value">${filteredTotal.toFixed(2)}</span>
+                    </div>
                   </div>
                 </div>
+
+                <BudgetCard
+                  budgetStatus={budgetStatus}
+                  onSetBudget={() => setShowSetBudgetModal(true)}
+                />
               </div>
             </div>
 
@@ -287,6 +318,13 @@ const Dashboard: React.FC = () => {
         confirmText="Delete"
         cancelText="Cancel"
         type="danger"
+      />
+
+      <SetBudgetModal
+        isOpen={showSetBudgetModal}
+        onClose={() => setShowSetBudgetModal(false)}
+        currentBudget={budgetStatus}
+        onSaved={fetchBudgetStatus}
       />
     </div>
   );

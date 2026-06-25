@@ -21,7 +21,9 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlite(
+                configuration.GetConnectionString("DefaultConnection"),
+                b => b.MigrationsAssembly("ExpenseTracker.API")));
 
         return services;
     }
@@ -89,6 +91,7 @@ public static class ServiceCollectionExtensions
         // Application Services
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IExpenseService, ExpenseService>();
+        services.AddScoped<IBudgetService, BudgetService>();
 
         // Register OCR Service with HttpClient
         services.AddHttpClient<OcrService>();

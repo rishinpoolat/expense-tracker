@@ -8,6 +8,8 @@ namespace ExpenseTracker.Core.Entities
         public string LastName { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+        public decimal? MonthlyBudget { get; set; }
+
         // Navigation properties
         public virtual ICollection<Expense> Expenses { get; set; } = new List<Expense>();
 
