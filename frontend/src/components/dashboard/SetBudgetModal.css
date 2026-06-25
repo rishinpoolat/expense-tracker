@@ -1,0 +1,114 @@
+.set-budget-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.set-budget-modal__hint {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.set-budget-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.set-budget-modal__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.set-budget-modal__input {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.set-budget-modal__input:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
+}
+
+.set-budget-modal__error {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #dc2626;
+}
+
+.set-budget-modal__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.set-budget-modal__right {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.set-budget-modal__clear-btn {
+  background: none;
+  border: none;
+  font-size: 0.875rem;
+  color: #dc2626;
+  cursor: pointer;
+  padding: 8px 0;
+  font-weight: 500;
+}
+
+.set-budget-modal__clear-btn:hover {
+  text-decoration: underline;
+}
+
+.set-budget-modal__cancel-btn {
+  padding: 10px 20px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.set-budget-modal__cancel-btn:hover {
+  background: #f9fafb;
+}
+
+.set-budget-modal__save-btn {
+  padding: 10px 24px;
+  background: #111827;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.set-budget-modal__save-btn:hover:not(:disabled) {
+  background: #1f2937;
+}
+
+.set-budget-modal__save-btn:disabled,
+.set-budget-modal__cancel-btn:disabled,
+.set-budget-modal__clear-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
