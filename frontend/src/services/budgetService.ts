@@ -7,7 +7,11 @@ export const budgetService = {
     return response.data;
   },
 
-  async setBudget(amount: number | null): Promise<void> {
+  async setBudget(amount: number): Promise<void> {
     await api.put('/budget', { amount });
+  },
+
+  async clearBudget(): Promise<void> {
+    await api.delete('/budget');
   },
 };

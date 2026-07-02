@@ -5,6 +5,7 @@ vi.mock('../../src/services/api', () => ({
   api: {
     get: vi.fn(),
     put: vi.fn(),
+    delete: vi.fn(),
   },
 }))
 
@@ -44,13 +45,15 @@ describe('budgetService', () => {
 
       expect(api.put).toHaveBeenCalledWith('/budget', { amount: 1500 })
     })
+  })
 
-    it('should send null amount when clearing the budget', async () => {
-      vi.mocked(api.put).mockResolvedValueOnce({})
+  describe('clearBudget', () => {
+    it('should call DELETE /budget', async () => {
+      vi.mocked(api.delete).mockResolvedValueOnce({})
 
-      await budgetService.setBudget(null)
+      await budgetService.clearBudget()
 
-      expect(api.put).toHaveBeenCalledWith('/budget', { amount: null })
+      expect(api.delete).toHaveBeenCalledWith('/budget')
     })
   })
 })

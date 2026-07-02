@@ -42,7 +42,7 @@ const BudgetCard: React.FC<BudgetCardProps> = ({ budgetStatus, onSetBudget }) =>
             />
           </div>
           <span className={`budget-card__pct ${isOver ? 'budget-card__pct--over' : isNear ? 'budget-card__pct--near' : ''}`}>
-            {budgetStatus!.percentage.toFixed(0)}%
+            {Math.min(budgetStatus!.percentage, 9999).toFixed(0)}%
           </span>
         </div>
       )}

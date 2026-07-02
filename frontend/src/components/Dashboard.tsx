@@ -35,7 +35,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     fetchExpenses();
-    fetchBudgetStatus();
+    fetchBudgetStatus(true);
   }, []);
 
   const fetchExpenses = async () => {
@@ -52,12 +52,15 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const fetchBudgetStatus = async () => {
+  const fetchBudgetStatus = async (showError = false) => {
     try {
       const status = await budgetService.getBudgetStatus();
       setBudgetStatus(status);
     } catch (err) {
       console.error('Error fetching budget status:', err);
+      if (showError) {
+        setError('Failed to load budget status. Please refresh the page.');
+      }
     }
   };
 
@@ -68,7 +71,7 @@ const Dashboard: React.FC = () => {
       setExpenses(prev => [newExpense, ...prev]);
       setShowAddModal(false);
       setError('');
-      fetchBudgetStatus();
+      await fetchBudgetStatus();
     } catch (err: any) {
       setError('Failed to create expense. Please try again.');
       console.error('Error creating expense:', err);
@@ -89,7 +92,7 @@ const Dashboard: React.FC = () => {
       setShowEditModal(false);
       setEditingExpense(null);
       setError('');
-      fetchBudgetStatus();
+      await fetchBudgetStatus();
     } catch (err: any) {
       setError('Failed to update expense. Please try again.');
       console.error('Error updating expense:', err);
@@ -110,7 +113,7 @@ const Dashboard: React.FC = () => {
       await expenseService.deleteExpense(deletingExpenseId);
       setExpenses(prev => prev.filter(expense => expense.id !== deletingExpenseId));
       setError('');
-      fetchBudgetStatus();
+      await fetchBudgetStatus();
     } catch (err: any) {
       setError('Failed to delete expense. Please try again.');
       console.error('Error deleting expense:', err);

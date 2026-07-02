@@ -23,8 +23,8 @@ namespace ExpenseTracker.Application.Services
                 ?? throw new InvalidOperationException("User not found");
 
             var now = DateTime.UtcNow;
-            var startOfMonth = new DateTime(now.Year, now.Month, 1, 0, 0, 0, DateTimeKind.Utc);
-            var endOfMonth = startOfMonth.AddMonths(1).AddTicks(-1);
+            var startOfMonth = new DateTime(now.Year, now.Month, 1, 0, 0, 0, DateTimeKind.Unspecified);
+            var endOfMonth = new DateTime(now.Year, now.Month, DateTime.DaysInMonth(now.Year, now.Month), 23, 59, 59, 999, DateTimeKind.Unspecified);
 
             var monthlyExpenses = await _expenseRepository.GetByDateRangeAsync(userId, startOfMonth, endOfMonth);
             var spent = monthlyExpenses.Sum(e => e.Amount);
@@ -50,6 +50,17 @@ namespace ExpenseTracker.Application.Services
                 ?? throw new InvalidOperationException("User not found");
 
             user.MonthlyBudget = dto.Amount;
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+                throw new InvalidOperationException(string.Join("; ", result.Errors.Select(e => e.Description)));
+        }
+
+        public async Task ClearBudgetAsync(Guid userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString())
+                ?? throw new InvalidOperationException("User not found");
+
+            user.MonthlyBudget = null;
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
                 throw new InvalidOperationException(string.Join("; ", result.Errors.Select(e => e.Description)));
