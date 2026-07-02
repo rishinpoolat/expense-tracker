@@ -6,5 +6,6 @@ namespace ExpenseTracker.Application.Interfaces
     {
         Task<BudgetStatusDto> GetBudgetStatusAsync(Guid userId);
         Task SetBudgetAsync(Guid userId, SetBudgetDto dto);
+        Task ClearBudgetAsync(Guid userId);
     }
 }

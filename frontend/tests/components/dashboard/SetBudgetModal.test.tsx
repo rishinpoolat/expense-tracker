@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import SetBudgetModal from '../../../src/components/dashboard/SetBudgetModal'
 import type { BudgetStatus } from '../../../src/types/budget'
@@ -7,6 +7,7 @@ import type { BudgetStatus } from '../../../src/types/budget'
 vi.mock('../../../src/services/budgetService', () => ({
   budgetService: {
     setBudget: vi.fn(),
+    clearBudget: vi.fn(),
   },
 }))
 
@@ -55,6 +56,7 @@ describe('SetBudgetModal', () => {
 
     expect(screen.getByText(/greater than 0/i)).toBeInTheDocument()
     expect(budgetService.setBudget).not.toHaveBeenCalled()
+    expect(budgetService.clearBudget).not.toHaveBeenCalled()
   })
 
   it('shows an error for zero', async () => {
@@ -88,8 +90,8 @@ describe('SetBudgetModal', () => {
     expect(onClose).toHaveBeenCalled()
   })
 
-  it('calls setBudget(null) when input is empty', async () => {
-    vi.mocked(budgetService.setBudget).mockResolvedValueOnce(undefined)
+  it('calls clearBudget() when input is empty and Save is clicked', async () => {
+    vi.mocked(budgetService.clearBudget).mockResolvedValueOnce(undefined)
     const user = userEvent.setup()
     render(
       <SetBudgetModal isOpen={true} onClose={vi.fn()} currentBudget={noBudgetStatus} onSaved={vi.fn()} />
@@ -98,7 +100,8 @@ describe('SetBudgetModal', () => {
     await user.clear(input)
     await user.click(screen.getByRole('button', { name: 'Save' }))
 
-    await waitFor(() => expect(budgetService.setBudget).toHaveBeenCalledWith(null))
+    await waitFor(() => expect(budgetService.clearBudget).toHaveBeenCalled())
+    expect(budgetService.setBudget).not.toHaveBeenCalled()
   })
 
   it('shows "Clear budget" button only when a budget exists', () => {
@@ -113,15 +116,16 @@ describe('SetBudgetModal', () => {
     expect(screen.getByText(/clear budget/i)).toBeInTheDocument()
   })
 
-  it('calls setBudget(null) when Clear budget is clicked', async () => {
-    vi.mocked(budgetService.setBudget).mockResolvedValueOnce(undefined)
+  it('calls clearBudget() when Clear budget is clicked', async () => {
+    vi.mocked(budgetService.clearBudget).mockResolvedValueOnce(undefined)
     const user = userEvent.setup()
     render(
       <SetBudgetModal isOpen={true} onClose={vi.fn()} currentBudget={existingBudgetStatus} onSaved={vi.fn()} />
     )
     await user.click(screen.getByText(/clear budget/i))
 
-    await waitFor(() => expect(budgetService.setBudget).toHaveBeenCalledWith(null))
+    await waitFor(() => expect(budgetService.clearBudget).toHaveBeenCalled())
+    expect(budgetService.setBudget).not.toHaveBeenCalled()
   })
 
   it('calls onClose when Cancel is clicked', async () => {

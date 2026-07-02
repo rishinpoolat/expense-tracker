@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using FluentValidation;
 using ExpenseTracker.Application.DTOs.Expenses;
 using ExpenseTracker.Application.Interfaces;
@@ -11,7 +10,7 @@ namespace ExpenseTracker.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class ExpensesController : ControllerBase
+    public class ExpensesController : BaseApiController
     {
         private readonly IExpenseService _expenseService;
         private readonly IValidator<CreateExpenseDto> _createValidator;
@@ -28,12 +27,6 @@ namespace ExpenseTracker.API.Controllers
             _createValidator = createValidator;
             _updateValidator = updateValidator;
             _ocrService = ocrService;
-        }
-
-        private Guid GetUserId()
-        {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            return Guid.Parse(userIdClaim ?? throw new UnauthorizedAccessException("User ID not found"));
         }
 
         [HttpGet]

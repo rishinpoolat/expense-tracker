@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using FluentValidation;
 using ExpenseTracker.Application.DTOs.Budget;
 using ExpenseTracker.Application.Interfaces;
@@ -10,7 +9,7 @@ namespace ExpenseTracker.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class BudgetController : ControllerBase
+    public class BudgetController : BaseApiController
     {
         private readonly IBudgetService _budgetService;
         private readonly IValidator<SetBudgetDto> _setBudgetValidator;
@@ -19,12 +18,6 @@ namespace ExpenseTracker.API.Controllers
         {
             _budgetService = budgetService;
             _setBudgetValidator = setBudgetValidator;
-        }
-
-        private Guid GetUserId()
-        {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            return Guid.Parse(userIdClaim ?? throw new UnauthorizedAccessException("User ID not found"));
         }
 
         [HttpGet("status")]
@@ -40,9 +33,13 @@ namespace ExpenseTracker.API.Controllers
             {
                 return Unauthorized();
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex) when (ex.Message == "User not found")
             {
-                return BadRequest(new { message = ex.Message });
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { message = "An error occurred while retrieving budget status" });
             }
         }
 
@@ -69,9 +66,36 @@ namespace ExpenseTracker.API.Controllers
             {
                 return Unauthorized();
             }
-            catch (Exception ex)
+            catch (InvalidOperationException ex) when (ex.Message == "User not found")
             {
-                return BadRequest(new { message = ex.Message });
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { message = "An error occurred while updating budget" });
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> ClearBudget()
+        {
+            try
+            {
+                var userId = GetUserId();
+                await _budgetService.ClearBudgetAsync(userId);
+                return NoContent();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Unauthorized();
+            }
+            catch (InvalidOperationException ex) when (ex.Message == "User not found")
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new { message = "An error occurred while clearing budget" });
             }
         }
     }

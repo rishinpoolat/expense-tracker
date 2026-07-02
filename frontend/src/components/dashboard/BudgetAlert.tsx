@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { AlertTriangle } from 'lucide-react';
 import { authService } from '../../services/authService';
 import type { BudgetStatus } from '../../types/budget';
@@ -15,14 +15,15 @@ function getDismissKey(): string {
 }
 
 const BudgetAlert: React.FC<BudgetAlertProps> = ({ budgetStatus }) => {
+  const dismissKeyRef = useRef(getDismissKey());
   const [dismissed, setDismissed] = useState(
-    () => sessionStorage.getItem(getDismissKey()) === 'true'
+    () => sessionStorage.getItem(dismissKeyRef.current) === 'true'
   );
 
   // Reset dismissed state if spending drops back below the threshold
   useEffect(() => {
     if (!budgetStatus.isNearLimit) {
-      sessionStorage.removeItem(getDismissKey());
+      sessionStorage.removeItem(dismissKeyRef.current);
       setDismissed(false);
     }
   }, [budgetStatus.isNearLimit]);
@@ -30,14 +31,14 @@ const BudgetAlert: React.FC<BudgetAlertProps> = ({ budgetStatus }) => {
   if (!budgetStatus.isNearLimit || dismissed) return null;
 
   const handleDismiss = () => {
-    sessionStorage.setItem(getDismissKey(), 'true');
+    sessionStorage.setItem(dismissKeyRef.current, 'true');
     setDismissed(true);
   };
 
   const isOver = budgetStatus.percentage >= 100;
   const spent = budgetStatus.spent.toFixed(2);
   const budget = budgetStatus.budget?.toFixed(2);
-  const pct = budgetStatus.percentage.toFixed(0);
+  const pct = Math.min(budgetStatus.percentage, 9999).toFixed(0);
 
   return (
     <div className={`budget-alert ${isOver ? 'budget-alert--over' : 'budget-alert--warning'}`}>

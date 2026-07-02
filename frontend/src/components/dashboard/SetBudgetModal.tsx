@@ -23,36 +23,31 @@ const SetBudgetModal: React.FC<SetBudgetModalProps> = ({ isOpen, onClose, curren
     }
   }, [isOpen, currentBudget]);
 
-  const handleSave = async () => {
-    const parsed = parseFloat(amount);
-    if (amount !== '' && (isNaN(parsed) || parsed <= 0)) {
-      setError('Please enter a valid amount greater than 0.');
-      return;
-    }
-
+  const submitBudget = async (amount: number | null, errorMsg: string) => {
     try {
       setLoading(true);
-      await budgetService.setBudget(amount === '' ? null : parsed);
+      if (amount === null) await budgetService.clearBudget();
+      else await budgetService.setBudget(amount);
       onSaved();
       onClose();
     } catch {
-      setError('Failed to save budget. Please try again.');
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleClear = async () => {
-    try {
-      setLoading(true);
-      await budgetService.setBudget(null);
-      onSaved();
-      onClose();
-    } catch {
-      setError('Failed to clear budget. Please try again.');
-    } finally {
-      setLoading(false);
+  const handleSave = () => {
+    const parsed = parseFloat(amount);
+    if (amount !== '' && (isNaN(parsed) || parsed <= 0)) {
+      setError('Please enter a valid amount greater than 0.');
+      return;
     }
+    submitBudget(amount === '' ? null : parsed, 'Failed to save budget. Please try again.');
+  };
+
+  const handleClear = () => {
+    submitBudget(null, 'Failed to clear budget. Please try again.');
   };
 
   return (
